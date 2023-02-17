@@ -28,8 +28,6 @@ def main(page: ft.Page):
                 alerta_fallido.open = True
                 contador = contador + 1
                 txtcontador.value = contador
-                print(contador)
-                
             page.update()
             f.close()
         else:
