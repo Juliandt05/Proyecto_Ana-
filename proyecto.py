@@ -15,7 +15,7 @@ def main(page: ft.Page):
     page.update()
     colDatos=ft.Column(controls=[nombre_textfield,contrasena_textfield])
     conDatos= ft.Container(content=colDatos,width=250,padding=ft.padding.only(bottom=50))
-
+    txtcontador = ft.TextField(value="0")
     def comprobar_usuario_contra(e):
         vusuario = []
         f = open("fichero.txt","r")
@@ -23,13 +23,13 @@ def main(page: ft.Page):
         for linea in f:
             l = linea.replace("\n", "")
             vusuario.append(l)
-        if contador<3:
+        if contador<2:
             if vusuario.count(nombre_textfield.value)>0 and vusuario.count(contrasena_textfield.value)>0:
                 alerta = ft.AlertDialog(title=ft.Text("Inicio de sesión conseguido"))
                 page.dialog = alerta
                 alerta.open = True
-                alerta_fallido = ft.AlertDialog(title=ft.Text("Inicio de sesión fallido"))
             else:
+                alerta_fallido = ft.AlertDialog(title=ft.Text("Inicio de sesión fallido"))
                 page.dialog = alerta_fallido
                 contador = contador + 1
                 alerta_fallido.open = True
@@ -44,6 +44,6 @@ def main(page: ft.Page):
         page.update()
     boton = ft.FilledButton(text="Iniciar Sesión", on_click=comprobar_usuario_contra)
     print(txtcontador.value)
-    page.add(imagen,nombre_textfield,contrasena_textfield)
-    txtcontador = ft.TextField(value="0")
+    page.add(imagen,conDatos,boton)
+
 ft.app(target=main,assets_dir="Imagenes")
