@@ -1,5 +1,5 @@
 import flet as ft
-
+import time
 def main(page: ft.Page):
     page.title = "Proyecto Inicio sesión"
     page.window_maximizable = False
@@ -9,8 +9,8 @@ def main(page: ft.Page):
     page.bgcolor = ft.colors.BLACK
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    nombre_textfield = ft.TextField(label="Nombre")
-    contrasena_textfield = ft.TextField(label="Contraseña")
+    nombre_textfield = ft.TextField(label="Nombre",border_color="White")
+    contrasena_textfield = ft.TextField(label="Contraseña",password=True, can_reveal_password=True, border_color="White")
     imagen = ft.Image(src="Logo_empresa.jpg",width=250,height=250)
     page.update()
     colDatos=ft.Column(controls=[nombre_textfield,contrasena_textfield])
@@ -28,6 +28,8 @@ def main(page: ft.Page):
                 alerta = ft.AlertDialog(title=ft.Text("Inicio de sesión conseguido"))
                 page.dialog = alerta
                 alerta.open = True
+                page.clean()
+                
             else:
                 alerta_fallido = ft.AlertDialog(title=ft.Text("Inicio de sesión fallido"))
                 page.dialog = alerta_fallido
@@ -37,12 +39,20 @@ def main(page: ft.Page):
             page.update()
             f.close()
         else:
-            alerta_fallido_intentos = ft.AlertDialog(title=ft.Text("Terminado intentos"))
+            alerta_fallido_intentos = ft.AlertDialog(title=ft.Text("Usuario Bloqueado"))
             page.dialog = alerta_fallido_intentos
             alerta_fallido_intentos.open = True
             page.update()
+            time.sleep(1)
+            page.window_close()
+            
+
+
         page.update()
-    boton = ft.FilledButton(text="Iniciar Sesión", on_click=comprobar_usuario_contra)
+
+
+
+    boton = ft.ElevatedButton(text="Iniciar Sesión", on_click=comprobar_usuario_contra,color="White")
     print(txtcontador.value)
     page.add(imagen,conDatos,boton)
 
