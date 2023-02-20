@@ -9,8 +9,8 @@ def main(page: ft.Page):
     page.bgcolor = ft.colors.BLACK
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    nombre_textfield = ft.TextField(label="Nombre")
-    contrasena_textfield = ft.TextField(label="Contraseña",password=True, can_reveal_password=True)
+    nombre_textfield = ft.TextField(label="Nombre",border_color="White")
+    contrasena_textfield = ft.TextField(label="Contraseña",password=True, can_reveal_password=True, border_color="White")
     imagen = ft.Image(src="Logo_empresa.jpg",width=250,height=250)
     page.update()
     colDatos=ft.Column(controls=[nombre_textfield,contrasena_textfield])
